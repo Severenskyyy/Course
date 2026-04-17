@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Регистр накопления "Выдачи" - Библиотека АБИС
+    Конфигурация 1С:Предприятие 8.3
+    
+    Хранит информацию о всех выдачах книг:
+    - Активные выдачи (ДатаВозврата = пустая дата)
+    - Завершённые выдачи (ДатаВозврата заполнена)
+    - Просроченные (ДатаВозвратаПлан < ТекущаяДата и ДатаВозврата пуста)
+-->
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <AccumulationRegister uuid="r1e2g3i4-s5t6-7890-abcd-ef1234567890">
+        <InternalInfo>
+            <ObjectVersion>1.0.0</ObjectVersion>
+            <GeneratedType>AccumulationRegister</GeneratedType>
+        </InternalInfo>
+        <Properties>
+            <Name>Выдачи</Name>
+            <Synonym>
+                <v8:item>
+                    <v8:lang>ru</v8:lang>
+                    <v8:content>Выдачи книг</v8:content>
+                </v8:item>
+            </Synonym>
+            <Comment>Регистр учёта выдач книг читателям</Comment>
+            <UseStandardCommands>true</UseStandardCommands>
+            <RegisterType>Turnovers</RegisterType>
+            <EnableTotalsSplitting>true</EnableTotalsSplitting>
+        </Properties>
+        
+        <ChildObjects>
+            <!-- Измерения регистра -->
+            <Dimension uuid="dim-reader-001">
+                <Properties>
+                    <Name>Читатель</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Читатель</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>CatalogRef.Читатели</v8:Type>
+                    </Type>
+                    <UseInTotals>true</UseInTotals>
+                </Properties>
+            </Dimension>
+            
+            <Dimension uuid="dim-book-002">
+                <Properties>
+                    <Name>Книга</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Книга</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>CatalogRef.Книги</v8:Type>
+                    </Type>
+                    <UseInTotals>true</UseInTotals>
+                </Properties>
+            </Dimension>
+            
+            <!-- Ресурсы регистра -->
+            <Resource uuid="res-quantity-001">
+                <Properties>
+                    <Name>Количество</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Количество</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:decimal</v8:Type>
+                        <v8:NumberQualifiers>
+                            <v8:Digits>10</v8:Digits>
+                            <v8:FractionDigits>0</v8:FractionDigits>
+                            <v8:AllowedSign>Any</v8:AllowedSign>
+                        </v8:NumberQualifiers>
+                    </Type>
+                    <Comment>+1 при выдаче, -1 при возврате</Comment>
+                </Properties>
+            </Resource>
+            
+            <!-- Реквизиты регистра -->
+            <Attribute uuid="attr-issuedate-001">
+                <Properties>
+                    <Name>ДатаВыдачи</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Дата выдачи</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:dateTime</v8:Type>
+                        <v8:DateQualifiers>
+                            <v8:DateFractions>Date</v8:DateFractions>
+                        </v8:DateQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-duedate-002">
+                <Properties>
+                    <Name>ДатаВозвратаПлан</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Планируемая дата возврата</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:dateTime</v8:Type>
+                        <v8:DateQualifiers>
+                            <v8:DateFractions>Date</v8:DateFractions>
+                        </v8:DateQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-returndate-003">
+                <Properties>
+                    <Name>ДатаВозврата</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Фактическая дата возврата</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:dateTime</v8:Type>
+                        <v8:DateQualifiers>
+                            <v8:DateFractions>Date</v8:DateFractions>
+                        </v8:DateQualifiers>
+                    </Type>
+                    <Comment>Пустая дата означает, что книга не возвращена</Comment>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-librarian-004">
+                <Properties>
+                    <Name>Библиотекарь</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Библиотекарь</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>CatalogRef.Пользователи</v8:Type>
+                    </Type>
+                </Properties>
+            </Attribute>
+        </ChildObjects>
+    </AccumulationRegister>
+</MetaDataObject>

@@ -1,0 +1,185 @@
+openapi: 3.0.0
+info:
+  title: АБИС API (mock)
+  version: 1.0.0
+  description: Автоматизированная библиотечно-информационная система — Кейс 8
+paths:
+  /api/books:
+    get:
+      summary: Список книг
+      parameters:
+        - in: query
+          name: author
+          schema: { type: string }
+        - in: query
+          name: year
+          schema: { type: integer }
+        - in: query
+          name: available
+          schema: { type: boolean }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/Book" } }
+    post:
+      summary: Добавить книгу
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BookCreate" }
+      responses:
+        "201": { description: Created }
+        "409": { description: Книга с таким book_code уже существует }
+  /api/readers:
+    get:
+      summary: Список читателей
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/Reader" } }
+  /api/loans:
+    get:
+      summary: Список выдач
+      parameters:
+        - in: query
+          name: active
+          schema: { type: boolean }
+      responses:
+        "200":
+          description: OK
+    post:
+      summary: Оформить выдачу
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/LoanCreate" }
+      responses:
+        "201": { description: Выдача оформлена }
+        "409": { description: Книга уже выдана }
+  /api/loans/{loan_id}/return:
+    post:
+      summary: Оформить возврат
+      parameters:
+        - in: path
+          name: loan_id
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Возврат оформлен }
+        "404": { description: Выдача не найдена }
+  /api/reports/overdue:
+    get:
+      summary: Отчёт Просрочки
+      parameters:
+        - in: query
+          name: from
+          schema: { type: string, format: date }
+        - in: query
+          name: to
+          schema: { type: string, format: date }
+        - in: query
+          name: group
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OverdueReport" }
+  /api/reports/kpi:
+    get:
+      summary: KPI показатели
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/KPIMetrics" }
+  /api/import/books:
+    post:
+      summary: Импорт книг из CSV
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200": { description: Результат импорта }
+  /api/export/overdue:
+    get:
+      summary: Экспорт просрочек в CSV
+      responses:
+        "200":
+          description: CSV файл
+          content:
+            text/csv: {}
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        book_code: { type: string }
+        title: { type: string }
+        author: { type: string }
+        year: { type: integer }
+        udk: { type: string }
+        is_available: { type: boolean }
+    BookCreate:
+      type: object
+      required: [book_code, title, author, year, udk]
+      properties:
+        book_code: { type: string }
+        title: { type: string }
+        author: { type: string }
+        year: { type: integer }
+        udk: { type: string }
+    Reader:
+      type: object
+      properties:
+        reader_id: { type: string }
+        fio: { type: string }
+        group: { type: string }
+    LoanCreate:
+      type: object
+      required: [reader_id, book_code, due_date]
+      properties:
+        reader_id: { type: string }
+        book_code: { type: string }
+        due_date: { type: string, format: date }
+    OverdueReport:
+      type: object
+      properties:
+        items: { type: array, items: { $ref: "#/components/schemas/OverdueItem" } }
+        total_overdue: { type: integer }
+        overdue_percentage: { type: number }
+    OverdueItem:
+      type: object
+      properties:
+        reader_id: { type: string }
+        fio: { type: string }
+        book_code: { type: string }
+        title: { type: string }
+        days_overdue: { type: integer }
+    KPIMetrics:
+      type: object
+      properties:
+        total_books: { type: integer }
+        active_loans: { type: integer }
+        overdue_loans: { type: integer }
+        overdue_percentage: { type: number }
+        is_within_target: { type: boolean }
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
