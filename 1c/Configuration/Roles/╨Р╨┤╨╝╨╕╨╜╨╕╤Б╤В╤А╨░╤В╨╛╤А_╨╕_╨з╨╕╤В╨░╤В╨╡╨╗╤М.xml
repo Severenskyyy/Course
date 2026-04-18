@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Роли "Администратор" и "Читатель".
+
+    Администратор: все права на конфигурацию и данные, управление импортом/экспортом.
+    Читатель: только просмотр собственных выдач (на уровне RLS — фильтр по Ссылка = ПараметрыСеанса.ТекущийЧитатель).
+-->
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <Role uuid="22222222-3333-4444-5555-666666666666">
+        <Properties>
+            <n>Администратор</n>
+            <Synonym><v8:item><v8:lang>ru</v8:lang><v8:content>Администратор АБИС</v8:content></v8:item></Synonym>
+            <Comment>Полные права: управление справочниками, импорт/экспорт, пользователи</Comment>
+        </Properties>
+        <ChildObjects>
+            <Rights><object>Catalog.Книги</object>
+                <right>Read</right><right>View</right><right>Insert</right><right>Update</right><right>Delete</right>
+            </Rights>
+            <Rights><object>Catalog.Читатели</object>
+                <right>Read</right><right>View</right><right>Insert</right><right>Update</right><right>Delete</right>
+            </Rights>
+            <Rights><object>Document.ВыдачаКниги</object>
+                <right>Read</right><right>View</right><right>Insert</right><right>Update</right><right>Delete</right>
+                <right>Posting</right><right>UndoPosting</right>
+            </Rights>
+            <Rights><object>Document.ВозвратКниги</object>
+                <right>Read</right><right>View</right><right>Insert</right><right>Update</right><right>Delete</right>
+                <right>Posting</right><right>UndoPosting</right>
+            </Rights>
+            <Rights><object>AccumulationRegister.Выдачи</object>
+                <right>Read</right><right>View</right><right>Update</right>
+            </Rights>
+            <Rights><object>Report.Просрочки</object><right>Read</right><right>View</right><right>Use</right></Rights>
+            <Rights><object>Report.ОборачиваемостьФонда</object><right>Read</right><right>View</right><right>Use</right></Rights>
+            <Rights><object>DataProcessor.ИмпортКаталогаCSV</object><right>Use</right><right>View</right></Rights>
+            <Rights><object>DataProcessor.ЭкспортПросрочек</object><right>Use</right><right>View</right></Rights>
+        </ChildObjects>
+    </Role>
+
+    <Role uuid="33333333-4444-5555-6666-777777777777">
+        <Properties>
+            <n>Читатель</n>
+            <Synonym><v8:item><v8:lang>ru</v8:lang><v8:content>Читатель (личный кабинет)</v8:content></v8:item></Synonym>
+            <Comment>Только просмотр своих выдач. RLS накладывает фильтр по текущему пользователю.</Comment>
+        </Properties>
+        <ChildObjects>
+            <Rights><object>Catalog.Книги</object><right>Read</right><right>View</right></Rights>
+            <Rights>
+                <object>Document.ВыдачаКниги</object>
+                <right>Read</right>
+                <right>View</right>
+                <RestrictionByCondition>
+                    <Condition>ВыдачаКниги.Читатель = ПараметрыСеанса.ТекущийЧитатель</Condition>
+                    <Field>Ссылка</Field>
+                </RestrictionByCondition>
+            </Rights>
+        </ChildObjects>
+    </Role>
+
+</MetaDataObject>

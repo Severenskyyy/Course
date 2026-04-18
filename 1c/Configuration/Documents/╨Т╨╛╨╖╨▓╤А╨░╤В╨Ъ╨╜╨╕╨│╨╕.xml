@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Документ "Возврат книги" — Библиотека АБИС
+    Конфигурация 1С:Предприятие 8.3
+-->
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Document uuid="e1f2a3b4-c5d6-7890-2345-67890abcdef1">
+        <InternalInfo>
+            <ObjectVersion>1.0.0</ObjectVersion>
+            <GeneratedType>Document</GeneratedType>
+        </InternalInfo>
+        <Properties>
+            <n>ВозвратКниги</n>
+            <Synonym>
+                <v8:item>
+                    <v8:lang>ru</v8:lang>
+                    <v8:content>Возврат книги</v8:content>
+                </v8:item>
+            </Synonym>
+            <Comment>Документ регистрации возврата ранее выданной книги</Comment>
+            <UseStandardCommands>true</UseStandardCommands>
+            <NumberType>String</NumberType>
+            <NumberLength>11</NumberLength>
+            <NumberAllowedLength>Variable</NumberAllowedLength>
+            <NumberPeriodicity>Year</NumberPeriodicity>
+            <CheckUnique>true</CheckUnique>
+            <Autonumbering>true</Autonumbering>
+            <Posting>Allow</Posting>
+            <RealTimePosting>Deny</RealTimePosting>
+            <RegisterRecords>AccumulationRegister.Выдачи</RegisterRecords>
+            <DefaultObjectForm>Document.ВозвратКниги.Form.ФормаДокумента</DefaultObjectForm>
+            <DefaultListForm>Document.ВозвратКниги.Form.ФормаСписка</DefaultListForm>
+        </Properties>
+
+        <ChildObjects>
+            <!-- Реквизиты документа -->
+            <Attribute uuid="ret-attr-issue-001">
+                <Properties>
+                    <n>ДокументВыдачи</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Документ выдачи</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Comment>Ссылка на исходный документ выдачи (для трассировки)</Comment>
+                    <Type>
+                        <v8:Type>DocumentRef.ВыдачаКниги</v8:Type>
+                    </Type>
+                    <FillChecking>ShowError</FillChecking>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="ret-attr-book-002">
+                <Properties>
+                    <n>Книга</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Книга</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>CatalogRef.Книги</v8:Type>
+                    </Type>
+                    <FillChecking>ShowError</FillChecking>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="ret-attr-reader-003">
+                <Properties>
+                    <n>Читатель</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Читатель</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>CatalogRef.Читатели</v8:Type>
+                    </Type>
+                    <FillChecking>ShowError</FillChecking>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="ret-attr-returndate-004">
+                <Properties>
+                    <n>ДатаВозврата</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Дата возврата</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Comment>Фактическая дата возврата книги (return_date в CSV)</Comment>
+                    <Type>
+                        <v8:Type>xs:dateTime</v8:Type>
+                        <v8:DateQualifiers>
+                            <v8:DateFractions>Date</v8:DateFractions>
+                        </v8:DateQualifiers>
+                    </Type>
+                    <FillChecking>ShowError</FillChecking>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="ret-attr-duedate-005">
+                <Properties>
+                    <n>ПлановаяДатаВозврата</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Плановая дата возврата</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Comment>Копия due_date из документа выдачи (для расчёта просрочки)</Comment>
+                    <Type>
+                        <v8:Type>xs:dateTime</v8:Type>
+                        <v8:DateQualifiers>
+                            <v8:DateFractions>Date</v8:DateFractions>
+                        </v8:DateQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="ret-attr-overdue-006">
+                <Properties>
+                    <n>ДнейПросрочки</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Дней просрочки</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Comment>Автоматически рассчитывается: max(0, ДатаВозврата - ПлановаяДатаВозврата)</Comment>
+                    <Type>
+                        <v8:Type>xs:decimal</v8:Type>
+                        <v8:NumberQualifiers>
+                            <v8:Digits>5</v8:Digits>
+                            <v8:FractionDigits>0</v8:FractionDigits>
+                            <v8:AllowedSign>Nonnegative</v8:AllowedSign>
+                        </v8:NumberQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="ret-attr-condition-007">
+                <Properties>
+                    <n>СостояниеКниги</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Состояние книги</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Comment>Норма / Повреждена / Утеряна</Comment>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>30</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                    <FillValue xsi:type="xs:string">Норма</FillValue>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="ret-attr-librarian-008">
+                <Properties>
+                    <n>Библиотекарь</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Библиотекарь</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>CatalogRef.Пользователи</v8:Type>
+                    </Type>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="ret-attr-comment-009">
+                <Properties>
+                    <n>Комментарий</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Комментарий</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>500</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+
+            <!-- Формы -->
+            <Form>ФормаДокумента</Form>
+            <Form>ФормаСписка</Form>
+        </ChildObjects>
+    </Document>
+</MetaDataObject>

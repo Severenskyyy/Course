@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Документ "Выдача книги" - Библиотека АБИС
+    Конфигурация 1С:Предприятие 8.3
+-->
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Document uuid="d1e2f3a4-b5c6-7890-1234-567890abcdef">
+        <InternalInfo>
+            <ObjectVersion>1.0.0</ObjectVersion>
+            <GeneratedType>Document</GeneratedType>
+        </InternalInfo>
+        <Properties>
+            <Name>ВыдачаКниги</Name>
+            <Synonym>
+                <v8:item>
+                    <v8:lang>ru</v8:lang>
+                    <v8:content>Выдача книги</v8:content>
+                </v8:item>
+            </Synonym>
+            <Comment>Документ регистрации выдачи книги читателю</Comment>
+            <UseStandardCommands>true</UseStandardCommands>
+            <NumberType>String</NumberType>
+            <NumberLength>11</NumberLength>
+            <NumberAllowedLength>Variable</NumberAllowedLength>
+            <NumberPeriodicity>Year</NumberPeriodicity>
+            <CheckUnique>true</CheckUnique>
+            <Autonumbering>true</Autonumbering>
+            <Posting>Allow</Posting>
+            <RealTimePosting>Deny</RealTimePosting>
+            <RegisterRecords>AccumulationRegister.Выдачи</RegisterRecords>
+            <DefaultObjectForm>Document.ВыдачаКниги.Form.ФормаДокумента</DefaultObjectForm>
+            <DefaultListForm>Document.ВыдачаКниги.Form.ФормаСписка</DefaultListForm>
+        </Properties>
+        
+        <ChildObjects>
+            <!-- Реквизиты документа -->
+            <Attribute uuid="attr-book-001">
+                <Properties>
+                    <Name>Книга</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Книга</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>CatalogRef.Книги</v8:Type>
+                    </Type>
+                    <FillChecking>ShowError</FillChecking>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-reader-002">
+                <Properties>
+                    <Name>Читатель</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Читатель</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>CatalogRef.Читатели</v8:Type>
+                    </Type>
+                    <FillChecking>ShowError</FillChecking>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-duedate-003">
+                <Properties>
+                    <Name>ДатаВозвратаПлан</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Планируемая дата возврата</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:dateTime</v8:Type>
+                        <v8:DateQualifiers>
+                            <v8:DateFractions>Date</v8:DateFractions>
+                        </v8:DateQualifiers>
+                    </Type>
+                    <FillChecking>ShowError</FillChecking>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-librarian-004">
+                <Properties>
+                    <Name>Библиотекарь</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Библиотекарь (кто выдал)</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>CatalogRef.Пользователи</v8:Type>
+                    </Type>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-comment-005">
+                <Properties>
+                    <Name>Комментарий</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Комментарий</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>500</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+        </ChildObjects>
+    </Document>
+</MetaDataObject>

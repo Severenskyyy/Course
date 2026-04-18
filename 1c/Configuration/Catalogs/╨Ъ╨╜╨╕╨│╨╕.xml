@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Справочник "Книги" - Библиотека АБИС
+    Конфигурация 1С:Предприятие 8.3
+-->
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Catalog uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890">
+        <InternalInfo>
+            <ObjectVersion>1.0.0</ObjectVersion>
+            <GeneratedType>Catalog</GeneratedType>
+        </InternalInfo>
+        <Properties>
+            <Name>Книги</Name>
+            <Synonym>
+                <v8:item>
+                    <v8:lang>ru</v8:lang>
+                    <v8:content>Книги</v8:content>
+                </v8:item>
+            </Synonym>
+            <Comment>Каталог книг библиотеки</Comment>
+            <UseStandardCommands>true</UseStandardCommands>
+            <CodeLength>20</CodeLength>
+            <CodeType>String</CodeType>
+            <DescriptionLength>500</DescriptionLength>
+            <Hierarchical>false</Hierarchical>
+            <LimitLevelCount>false</LimitLevelCount>
+            <InputByString>Catalog.Книги.StandardAttribute.Code</InputByString>
+            <InputByString>Catalog.Книги.StandardAttribute.Description</InputByString>
+            <SearchStringModeOnInputByString>AnyPart</SearchStringModeOnInputByString>
+            <EditType>InDialog</EditType>
+            <QuickChoice>true</QuickChoice>
+            <ChoiceMode>BothWays</ChoiceMode>
+            <DefaultObjectForm>Catalog.Книги.Form.ФормаЭлемента</DefaultObjectForm>
+            <DefaultListForm>Catalog.Книги.Form.ФормаСписка</DefaultListForm>
+        </Properties>
+        
+        <ChildObjects>
+            <!-- Реквизиты справочника -->
+            <Attribute uuid="attr-author-001">
+                <Properties>
+                    <Name>Автор</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Автор</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>300</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                    <FillChecking>ShowError</FillChecking>
+                    <Indexing>Index</Indexing>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-year-002">
+                <Properties>
+                    <Name>ГодИздания</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Год издания</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:decimal</v8:Type>
+                        <v8:NumberQualifiers>
+                            <v8:Digits>4</v8:Digits>
+                            <v8:FractionDigits>0</v8:FractionDigits>
+                            <v8:AllowedSign>Nonnegative</v8:AllowedSign>
+                        </v8:NumberQualifiers>
+                    </Type>
+                    <MinValue>1000</MinValue>
+                    <MaxValue>2100</MaxValue>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-udk-003">
+                <Properties>
+                    <Name>УДК</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>УДК (классификатор)</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>50</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                    <FillChecking>ShowError</FillChecking>
+                    <Indexing>Index</Indexing>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-desc-004">
+                <Properties>
+                    <Name>Описание</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Описание книги</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>0</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                    <MultiLine>true</MultiLine>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-publisher-005">
+                <Properties>
+                    <Name>Издательство</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Издательство</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>200</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-pages-006">
+                <Properties>
+                    <Name>КоличествоСтраниц</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Количество страниц</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:decimal</v8:Type>
+                        <v8:NumberQualifiers>
+                            <v8:Digits>5</v8:Digits>
+                            <v8:FractionDigits>0</v8:FractionDigits>
+                            <v8:AllowedSign>Nonnegative</v8:AllowedSign>
+                        </v8:NumberQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-isbn-007">
+                <Properties>
+                    <Name>ISBN</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>ISBN</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>20</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-available-008">
+                <Properties>
+                    <Name>Доступна</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Доступна для выдачи</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:boolean</v8:Type>
+                    </Type>
+                    <FillValue>true</FillValue>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-created-009">
+                <Properties>
+                    <Name>ДатаСоздания</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Дата добавления в каталог</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:dateTime</v8:Type>
+                        <v8:DateQualifiers>
+                            <v8:DateFractions>DateTime</v8:DateFractions>
+                        </v8:DateQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+            
+            <Attribute uuid="attr-modified-010">
+                <Properties>
+                    <Name>ДатаИзменения</Name>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Дата последнего изменения</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:dateTime</v8:Type>
+                        <v8:DateQualifiers>
+                            <v8:DateFractions>DateTime</v8:DateFractions>
+                        </v8:DateQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+        </ChildObjects>
+    </Catalog>
+</MetaDataObject>

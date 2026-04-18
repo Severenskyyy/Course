@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Роль "Библиотекарь" — права оператора библиотеки.
+    Может: операции выдачи/возврата, просмотр каталога и читателей, формирование отчётов.
+    Не может: изменять структуру данных, управлять пользователями.
+-->
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Role uuid="11111111-2222-3333-4444-555555555555">
+        <InternalInfo>
+            <ObjectVersion>1.0.0</ObjectVersion>
+            <GeneratedType>Role</GeneratedType>
+        </InternalInfo>
+        <Properties>
+            <n>Библиотекарь</n>
+            <Synonym>
+                <v8:item>
+                    <v8:lang>ru</v8:lang>
+                    <v8:content>Библиотекарь</v8:content>
+                </v8:item>
+            </Synonym>
+            <Comment>Основная роль оператора — выдачи, возвраты, отчёты</Comment>
+        </Properties>
+
+        <ChildObjects>
+            <!-- Справочник Книги: только чтение -->
+            <Rights>
+                <object>Catalog.Книги</object>
+                <right>Read</right>
+                <right>View</right>
+            </Rights>
+            <!-- Справочник Читатели: чтение + добавление/изменение -->
+            <Rights>
+                <object>Catalog.Читатели</object>
+                <right>Read</right>
+                <right>View</right>
+                <right>Insert</right>
+                <right>Update</right>
+            </Rights>
+            <!-- Документы выдачи/возврата: полные права -->
+            <Rights>
+                <object>Document.ВыдачаКниги</object>
+                <right>Read</right>
+                <right>View</right>
+                <right>Insert</right>
+                <right>Update</right>
+                <right>Posting</right>
+                <right>UndoPosting</right>
+            </Rights>
+            <Rights>
+                <object>Document.ВозвратКниги</object>
+                <right>Read</right>
+                <right>View</right>
+                <right>Insert</right>
+                <right>Update</right>
+                <right>Posting</right>
+                <right>UndoPosting</right>
+            </Rights>
+            <!-- Регистр выдач: чтение -->
+            <Rights>
+                <object>AccumulationRegister.Выдачи</object>
+                <right>Read</right>
+                <right>View</right>
+            </Rights>
+            <!-- Отчёты -->
+            <Rights>
+                <object>Report.Просрочки</object>
+                <right>Read</right>
+                <right>View</right>
+                <right>Use</right>
+            </Rights>
+            <Rights>
+                <object>Report.ОборачиваемостьФонда</object>
+                <right>Read</right>
+                <right>View</right>
+                <right>Use</right>
+            </Rights>
+        </ChildObjects>
+    </Role>
+</MetaDataObject>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Корневой файл конфигурации "Библиотека АБИС"
+    Платформа: 1С:Предприятие 8.3.20+
+    Кейс 8: Библиотека — выдача и просрочки (MVP)
+-->
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Configuration uuid="00000000-0000-0000-0000-100000000001">
+        <InternalInfo>
+            <ObjectVersion>1.0.0</ObjectVersion>
+            <GeneratedType>Configuration</GeneratedType>
+        </InternalInfo>
+        <Properties>
+            <n>БиблиотекаАБИС</n>
+            <Synonym>
+                <v8:item>
+                    <v8:lang>ru</v8:lang>
+                    <v8:content>Библиотека АБИС</v8:content>
+                </v8:item>
+            </Synonym>
+            <Comment>Учебный курсовой проект РТУ МИРЭА — автоматизация выдач и просрочек</Comment>
+            <Version>1.0.0</Version>
+            <Vendor>РТУ МИРЭА, команда курса ОПД (Кейс 8)</Vendor>
+            <DefaultRunMode>ManagedApplication</DefaultRunMode>
+            <ScriptVariant>Russian</ScriptVariant>
+            <CompatibilityMode>Version8_3_20</CompatibilityMode>
+            <DefaultLanguage>Language.Русский</DefaultLanguage>
+        </Properties>
+
+        <ChildObjects>
+            <!-- Подсистемы -->
+            <Subsystem>Каталог</Subsystem>
+            <Subsystem>Читатели</Subsystem>
+            <Subsystem>ОперацииВыдачи</Subsystem>
+            <Subsystem>Отчётность</Subsystem>
+            <Subsystem>ОбменДанными</Subsystem>
+
+            <!-- Роли -->
+            <Role>Библиотекарь</Role>
+            <Role>Администратор</Role>
+            <Role>Читатель</Role>
+
+            <!-- Общие модули -->
+            <CommonModule>ОбщегоНазначения</CommonModule>
+            <CommonModule>РаботаСКнигами</CommonModule>
+            <CommonModule>РаботаСЧитателями</CommonModule>
+            <CommonModule>УправлениеВыдачами</CommonModule>
+            <CommonModule>ОбменДанными</CommonModule>
+
+            <!-- Справочники -->
+            <Catalog>Книги</Catalog>
+            <Catalog>Читатели</Catalog>
+
+            <!-- Документы -->
+            <Document>ВыдачаКниги</Document>
+            <Document>ВозвратКниги</Document>
+
+            <!-- Регистры накопления -->
+            <AccumulationRegister>Выдачи</AccumulationRegister>
+
+            <!-- Отчёты -->
+            <Report>Просрочки</Report>
+            <Report>ОборачиваемостьФонда</Report>
+
+            <!-- Обработки -->
+            <DataProcessor>ИмпортКаталогаCSV</DataProcessor>
+            <DataProcessor>ЭкспортПросрочек</DataProcessor>
+        </ChildObjects>
+    </Configuration>
+</MetaDataObject>

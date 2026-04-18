@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Форма элемента справочника "Читатели" (управляемая форма)
+    Назначение: ввод карточки читателя.
+-->
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform">
+    <Items>
+        <Group name="ОсновнаяГруппа" type="UsualGroup">
+            <Title>
+                <v8:item><v8:lang>ru</v8:lang><v8:content>Основные сведения</v8:content></v8:item>
+            </Title>
+
+            <InputField name="Код" DataPath="Объект.Код" Title="Идентификатор читателя"/>
+            <InputField name="Наименование" DataPath="Объект.Наименование" Title="ФИО (краткое)"/>
+            <InputField name="ФИО" DataPath="Объект.ФИО" Title="ФИО (полное)"/>
+            <InputField name="Группа" DataPath="Объект.Группа" Title="Группа / подразделение"/>
+            <InputField name="Категория" DataPath="Объект.Категория" Title="Категория"/>
+            <InputField name="Email" DataPath="Объект.Email"/>
+            <InputField name="Телефон" DataPath="Объект.Телефон"/>
+            <InputField name="ДатаРегистрации" DataPath="Объект.ДатаРегистрации"/>
+            <CheckBoxField name="ЗаблокированВыдачи" DataPath="Объект.ЗаблокированВыдачи"/>
+        </Group>
+
+        <Group name="ДействияГруппа" type="CommandBar">
+            <Button name="КнопкаВыдатьКнигу" CommandName="ВыдатьКнигу"/>
+            <Button name="КнопкаПроверитьЗадолженность" CommandName="ПроверитьЗадолженность"/>
+        </Group>
+    </Items>
+
+    <CommandInterface>
+        <Command name="ВыдатьКнигу" Action="ОткрытьВыдачуКниги"/>
+        <Command name="ПроверитьЗадолженность" Action="ПоказатьПросрочкиЧитателя"/>
+    </CommandInterface>
+
+    <ModuleCode><![CDATA[
+        &НаСервере
+        Процедура ОткрытьВыдачуКниги(Команда)
+            ПараметрыВыдачи = Новый Структура("Читатель", Объект.Ссылка);
+            ОткрытьФорму("Документ.ВыдачаКниги.ФормаОбъекта", ПараметрыВыдачи);
+        КонецПроцедуры
+
+        &НаСервере
+        Процедура ПоказатьПросрочкиЧитателя(Команда)
+            ПараметрыОтчёта = Новый Структура("Читатель", Объект.Ссылка);
+            ОткрытьФорму("Отчёт.Просрочки.Форма", ПараметрыОтчёта);
+        КонецПроцедуры
+    ]]></ModuleCode>
+</Form>

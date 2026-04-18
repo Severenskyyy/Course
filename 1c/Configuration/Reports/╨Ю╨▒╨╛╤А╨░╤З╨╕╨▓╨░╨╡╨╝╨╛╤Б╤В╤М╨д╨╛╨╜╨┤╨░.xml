@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Отчёт "Оборачиваемость фонда" — Библиотека АБИС
+    Показывает KPI оборачиваемости книг (выдано/возвращено/доля активных)
+-->
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Report uuid="f1a2b3c4-d5e6-7890-3456-7890abcdef12">
+        <InternalInfo>
+            <ObjectVersion>1.0.0</ObjectVersion>
+            <GeneratedType>Report</GeneratedType>
+        </InternalInfo>
+        <Properties>
+            <n>ОборачиваемостьФонда</n>
+            <Synonym>
+                <v8:item>
+                    <v8:lang>ru</v8:lang>
+                    <v8:content>Оборачиваемость фонда</v8:content>
+                </v8:item>
+            </Synonym>
+            <Comment>KPI: оборот книг, активные и завершённые выдачи, доля просроченных</Comment>
+            <UseStandardCommands>true</UseStandardCommands>
+            <DefaultForm>Report.ОборачиваемостьФонда.Form.ФормаОтчёта</DefaultForm>
+            <IncludeHelpInContents>true</IncludeHelpInContents>
+            <MainDataCompositionSchema>Report.ОборачиваемостьФонда.Template.ОсновнаяСхемаКомпоновки</MainDataCompositionSchema>
+        </Properties>
+
+        <ChildObjects>
+            <Form>ФормаОтчёта</Form>
+            <Template>ОсновнаяСхемаКомпоновки</Template>
+
+            <!-- Схема компоновки данных (упрощённое описание) -->
+            <!-- Источник: AccumulationRegister.Выдачи -->
+            <!-- Группировки: Период (день/неделя/месяц), Читатель, Книга -->
+            <!-- Показатели:
+                 - ВыдаНо (количество документов ВыдачаКниги)
+                 - Возвращено (количество документов ВозвратКниги)
+                 - АктивныеВыдачи = ВыдаНо - Возвращено
+                 - ПросроченныеВыдачи (по отчёту Просрочки)
+                 - ДоляПросрочек = ПросроченныеВыдачи / АктивныеВыдачи
+                 - КоэффициентОборачиваемости = Возвращено / СреднийФонд
+            -->
+            <!-- Фильтры: Период, Категория читателя, Группа, Автор/UDK -->
+            <!-- Экспорт: CSV, Excel -->
+        </ChildObjects>
+    </Report>
+</MetaDataObject>

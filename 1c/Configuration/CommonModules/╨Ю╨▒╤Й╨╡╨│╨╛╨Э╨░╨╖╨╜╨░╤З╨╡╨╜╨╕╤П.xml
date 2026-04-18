@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Общий модуль "ОбщегоНазначения" — Библиотека АБИС
+    Вспомогательные функции и утилиты
+-->
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <CommonModule uuid="c1d2e3f4-a5b6-7890-4567-890abcdef123">
+        <InternalInfo>
+            <ObjectVersion>1.0.0</ObjectVersion>
+            <GeneratedType>CommonModule</GeneratedType>
+        </InternalInfo>
+        <Properties>
+            <n>ОбщегоНазначения</n>
+            <Synonym>
+                <v8:item>
+                    <v8:lang>ru</v8:lang>
+                    <v8:content>Общего назначения</v8:content>
+                </v8:item>
+            </Synonym>
+            <Comment>Вспомогательные функции (расчёт просрочек, валидации, утилиты)</Comment>
+            <Server>true</Server>
+            <ClientManagedApplication>false</ClientManagedApplication>
+            <ExternalConnection>true</ExternalConnection>
+            <ClientOrdinaryApplication>false</ClientOrdinaryApplication>
+            <Global>false</Global>
+            <ReturnValuesReuse>DontUse</ReturnValuesReuse>
+        </Properties>
+    </CommonModule>
+</MetaDataObject>

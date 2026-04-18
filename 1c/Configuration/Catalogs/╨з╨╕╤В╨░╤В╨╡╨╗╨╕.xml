@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Справочник "Читатели" — Библиотека АБИС
+    Конфигурация 1С:Предприятие 8.3
+-->
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Catalog uuid="b2c3d4e5-f6a7-8901-bcde-f23456789012">
+        <InternalInfo>
+            <ObjectVersion>1.0.0</ObjectVersion>
+            <GeneratedType>Catalog</GeneratedType>
+        </InternalInfo>
+        <Properties>
+            <n>Читатели</n>
+            <Synonym>
+                <v8:item>
+                    <v8:lang>ru</v8:lang>
+                    <v8:content>Читатели</v8:content>
+                </v8:item>
+            </Synonym>
+            <Comment>Справочник читателей библиотеки</Comment>
+            <UseStandardCommands>true</UseStandardCommands>
+            <CodeLength>12</CodeLength>
+            <CodeType>String</CodeType>
+            <CodeAllowedLength>Variable</CodeAllowedLength>
+            <DescriptionLength>200</DescriptionLength>
+            <Hierarchical>false</Hierarchical>
+            <LimitLevelCount>false</LimitLevelCount>
+            <InputByString>Catalog.Читатели.StandardAttribute.Code</InputByString>
+            <InputByString>Catalog.Читатели.StandardAttribute.Description</InputByString>
+            <SearchStringModeOnInputByString>AnyPart</SearchStringModeOnInputByString>
+            <EditType>InDialog</EditType>
+            <QuickChoice>true</QuickChoice>
+            <ChoiceMode>BothWays</ChoiceMode>
+            <DefaultObjectForm>Catalog.Читатели.Form.ФормаЭлемента</DefaultObjectForm>
+            <DefaultListForm>Catalog.Читатели.Form.ФормаСписка</DefaultListForm>
+        </Properties>
+
+        <ChildObjects>
+            <!-- Реквизиты справочника -->
+            <Attribute uuid="reader-attr-fio-001">
+                <Properties>
+                    <n>ФИО</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>ФИО</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Comment>Полное ФИО читателя (соответствует полю fio в CSV)</Comment>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>200</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                    <FillChecking>ShowError</FillChecking>
+                    <Indexing>Index</Indexing>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="reader-attr-group-002">
+                <Properties>
+                    <n>Группа</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Группа</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Comment>Учебная группа / подразделение (поле group в CSV)</Comment>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>50</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                    <Indexing>Index</Indexing>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="reader-attr-category-003">
+                <Properties>
+                    <n>Категория</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Категория</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Comment>Студент / Преподаватель / Сотрудник</Comment>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>30</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                    <ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="reader-attr-email-004">
+                <Properties>
+                    <n>Email</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Email</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>100</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="reader-attr-phone-005">
+                <Properties>
+                    <n>Телефон</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Телефон</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:string</v8:Type>
+                        <v8:StringQualifiers>
+                            <v8:Length>20</v8:Length>
+                            <v8:AllowedLength>Variable</v8:AllowedLength>
+                        </v8:StringQualifiers>
+                    </Type>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="reader-attr-dateregistered-006">
+                <Properties>
+                    <n>ДатаРегистрации</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Дата регистрации</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Type>
+                        <v8:Type>xs:dateTime</v8:Type>
+                        <v8:DateQualifiers>
+                            <v8:DateFractions>Date</v8:DateFractions>
+                        </v8:DateQualifiers>
+                    </Type>
+                    <FillValue xsi:type="v8:UndefinedValue"/>
+                </Properties>
+            </Attribute>
+
+            <Attribute uuid="reader-attr-status-007">
+                <Properties>
+                    <n>ЗаблокированВыдачи</n>
+                    <Synonym>
+                        <v8:item>
+                            <v8:lang>ru</v8:lang>
+                            <v8:content>Заблокированы выдачи</v8:content>
+                        </v8:item>
+                    </Synonym>
+                    <Comment>Флаг блокировки читателя (например, при систематических просрочках)</Comment>
+                    <Type>
+                        <v8:Type>xs:boolean</v8:Type>
+                    </Type>
+                </Properties>
+            </Attribute>
+
+            <!-- Формы -->
+            <Form>ФормаЭлемента</Form>
+            <Form>ФормаСписка</Form>
+        </ChildObjects>
+    </Catalog>
+</MetaDataObject>
