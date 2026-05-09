@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BPMN 2.0 диаграмма "Выдача-возврат книги" — АБИС (Кейс 8).
+  Формат: совместимый SVG для вставки в любой просмотрщик / презентацию.
+  Назначение: нормальная BPMN-нотация с двумя дорожками и расширениями.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Segoe UI, Arial" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+    </marker>
+    <marker id="arrow-dashed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#888"/>
+    </marker>
+    <style><![CDATA[
+      .lane { fill: #fafafa; stroke: #bbb; stroke-width: 1; }
+      .lane-header { fill: #e8eff8; stroke: #bbb; }
+      .lane-title { font-weight: 600; font-size: 13px; fill: #345; }
+      .task { fill: #fff; stroke: #1d4e89; stroke-width: 1.5; rx: 8; ry: 8; }
+      .task-system { fill: #eef5ff; stroke: #1d4e89; }
+      .event { fill: #fff; stroke: #2b8a2b; stroke-width: 2; }
+      .event-end { fill: #fff; stroke: #a33; stroke-width: 3; }
+      .event-timer { fill: #fff; stroke: #b36b00; stroke-width: 2; }
+      .gateway { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .flow { stroke: #333; stroke-width: 1.5; fill: none; }
+      .flow-dashed { stroke: #888; stroke-width: 1.2; fill: none; stroke-dasharray: 5,4; }
+      .label { fill: #333; }
+      .label-red { fill: #a33; font-weight: 600; }
+      .label-green { fill: #267326; font-weight: 600; }
+    ]]></style>
+  </defs>
+
+  <!-- Title -->
+  <text x="640" y="30" text-anchor="middle" font-size="18" font-weight="700" fill="#1d4e89">
+    BPMN: Выдача и возврат книги — АБИС (Кейс 8)
+  </text>
+  <text x="640" y="50" text-anchor="middle" font-size="12" fill="#666">
+    Три дорожки · XOR-шлюзы (BR-01, BR-06) · таймер due_date · альтернативные потоки
+  </text>
+
+  <!-- Lane headers -->
+  <rect x="60" y="80" width="40" height="600" class="lane-header"/>
+  <rect x="60" y="80" width="40" height="200" class="lane-header"/>
+  <text x="80" y="180" text-anchor="middle" class="lane-title" transform="rotate(-90 80,180)">Читатель</text>
+  <text x="80" y="400" text-anchor="middle" class="lane-title" transform="rotate(-90 80,400)">Библиотекарь</text>
+  <text x="80" y="600" text-anchor="middle" class="lane-title" transform="rotate(-90 80,600)">Система АБИС</text>
+
+  <!-- Lane separators -->
+  <rect x="100" y="80"  width="1140" height="200" class="lane"/>
+  <rect x="100" y="280" width="1140" height="200" class="lane"/>
+  <rect x="100" y="480" width="1140" height="200" class="lane"/>
+
+  <!-- Reader lane -->
+  <!-- Start event -->
+  <circle cx="150" cy="180" r="18" class="event"/>
+  <text x="150" y="220" text-anchor="middle" font-size="11">Запрос</text>
+  <text x="150" y="234" text-anchor="middle" font-size="11">книги</text>
+
+  <!-- Reader -> Librarian arrow -->
+  <path d="M 150,198 L 150,310" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- Return trigger (reader) -->
+  <circle cx="890" cy="180" r="18" class="event"/>
+  <text x="890" y="145" text-anchor="middle" font-size="11">Читатель</text>
+  <text x="890" y="220" text-anchor="middle" font-size="11">приносит</text>
+  <text x="890" y="234" text-anchor="middle" font-size="11">книгу</text>
+  <path d="M 890,198 L 890,310" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- Librarian lane -->
+  <!-- T1: поиск книги -->
+  <rect x="115" y="310" width="130" height="60" class="task"/>
+  <text x="180" y="340" text-anchor="middle">T1: Найти книгу</text>
+  <text x="180" y="356" text-anchor="middle" font-size="11" fill="#666">CatalogPage</text>
+
+  <!-- Arrow to T2 -->
+  <path d="M 245,340 L 275,340" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- T2: поиск читателя -->
+  <rect x="275" y="310" width="130" height="60" class="task"/>
+  <text x="340" y="340" text-anchor="middle">T2: Найти читателя</text>
+  <text x="340" y="356" text-anchor="middle" font-size="11" fill="#666">ReadersPage</text>
+
+  <!-- To system lane (G1) -->
+  <path d="M 340,370 L 340,510" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- T3: оформить выдачу -->
+  <rect x="560" y="310" width="130" height="60" class="task"/>
+  <text x="625" y="340" text-anchor="middle">T3: Оформить</text>
+  <text x="625" y="356" text-anchor="middle">выдачу</text>
+
+  <!-- T7: принять книгу -->
+  <rect x="815" y="310" width="130" height="60" class="task"/>
+  <text x="880" y="340" text-anchor="middle">T7: Принять</text>
+  <text x="880" y="356" text-anchor="middle">книгу</text>
+
+  <!-- T8: оформить возврат -->
+  <rect x="965" y="310" width="130" height="60" class="task"/>
+  <text x="1030" y="340" text-anchor="middle">T8: Оформить</text>
+  <text x="1030" y="356" text-anchor="middle">возврат</text>
+
+  <!-- T7 -> T8 -->
+  <path d="M 945,340 L 965,340" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- T8 to system -->
+  <path d="M 1030,370 L 1030,510" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- System lane -->
+  <!-- G1: книга свободна? -->
+  <polygon points="340,490 370,520 340,550 310,520" class="gateway"/>
+  <text x="340" y="524" text-anchor="middle" font-size="11">G1:</text>
+  <text x="340" y="538" text-anchor="middle" font-size="11">свободна?</text>
+
+  <!-- Arrow G1 -> G2 (yes) -->
+  <path d="M 370,520 L 420,520" class="flow" marker-end="url(#arrow)"/>
+  <text x="395" y="512" text-anchor="middle" class="label-green" font-size="11">Да</text>
+
+  <!-- G2: читатель не заблокирован? -->
+  <polygon points="450,490 480,520 450,550 420,520" class="gateway"/>
+  <text x="450" y="524" text-anchor="middle" font-size="11">G2:</text>
+  <text x="450" y="538" text-anchor="middle" font-size="10">не заблокир.?</text>
+
+  <!-- Arrow G2 -> T4 (yes) -->
+  <path d="M 480,520 L 560,520" class="flow" marker-end="url(#arrow)"/>
+  <text x="520" y="512" text-anchor="middle" class="label-green" font-size="11">Да</text>
+
+  <!-- T4: создать loan -->
+  <rect x="560" y="490" width="150" height="60" class="task task-system"/>
+  <text x="635" y="516" text-anchor="middle" font-size="12">T4: Создать loan</text>
+  <text x="635" y="532" text-anchor="middle" font-size="11" fill="#666">issue, due, return=NULL</text>
+
+  <!-- T4 -> Timer -->
+  <path d="M 710,520 L 760,520" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- Timer: due_date -->
+  <circle cx="780" cy="520" r="18" class="event-timer"/>
+  <path d="M 780,508 L 780,520 L 790,528" stroke="#b36b00" stroke-width="1.5" fill="none"/>
+  <text x="780" y="555" text-anchor="middle" font-size="11">⏲ due_date</text>
+
+  <!-- Timer -> G3 -->
+  <path d="M 798,520 L 860,520" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- G3: возврат в срок? -->
+  <polygon points="890,490 920,520 890,550 860,520" class="gateway"/>
+  <text x="890" y="524" text-anchor="middle" font-size="10">G3:</text>
+  <text x="890" y="538" text-anchor="middle" font-size="10">в срок?</text>
+
+  <!-- G3 -> T9 -->
+  <path d="M 920,520 L 960,520" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- T9: обновить return_date и рассчитать просрочку -->
+  <rect x="960" y="490" width="160" height="60" class="task task-system"/>
+  <text x="1040" y="516" text-anchor="middle" font-size="12">T9+T10: return_date</text>
+  <text x="1040" y="532" text-anchor="middle" font-size="11" fill="#666">+ days_overdue</text>
+
+  <!-- T9 -> End3 -->
+  <path d="M 1120,520 L 1170,520" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- End3 -->
+  <circle cx="1188" cy="520" r="18" class="event-end"/>
+  <text x="1188" y="555" text-anchor="middle" font-size="11">Возврат</text>
+  <text x="1188" y="570" text-anchor="middle" font-size="11">оформлен</text>
+
+  <!-- Alternative paths: BR-01, BR-06 -->
+  <!-- G1 -> End1 (no — book busy, BR-01) -->
+  <path d="M 340,550 L 340,620 L 200,620" class="flow" marker-end="url(#arrow)"/>
+  <text x="255" y="610" text-anchor="middle" class="label-red" font-size="11">Нет — BR-01</text>
+
+  <!-- G2 -> End1 (no — reader blocked, BR-06) -->
+  <path d="M 450,550 L 450,600 L 200,600" class="flow" marker-end="url(#arrow)"/>
+  <text x="325" y="592" text-anchor="middle" class="label-red" font-size="11">Нет — BR-06</text>
+
+  <!-- End1: отказ -->
+  <circle cx="180" cy="610" r="18" class="event-end"/>
+  <text x="180" y="645" text-anchor="middle" font-size="11">Отказ</text>
+
+  <!-- Dashed link: T3 -> T4 (triggers) -->
+  <path d="M 625,370 L 625,490" class="flow-dashed" marker-end="url(#arrow-dashed)"/>
+
+  <!-- Legend -->
+  <g transform="translate(900, 675)">
+    <text x="0" y="0" font-size="11" font-weight="600">Легенда:</text>
+    <circle cx="60" cy="-4" r="6" class="event"/> <text x="72" y="0" font-size="10">Старт/Событие</text>
+    <circle cx="170" cy="-4" r="6" class="event-end"/> <text x="182" y="0" font-size="10">Конец</text>
+    <polygon points="260,-10 270,-4 260,2 250,-4" class="gateway"/> <text x="276" y="0" font-size="10">Шлюз</text>
+    <rect x="320" y="-10" width="12" height="12" class="task"/> <text x="338" y="0" font-size="10">Задача</text>
+  </g>
+</svg>
